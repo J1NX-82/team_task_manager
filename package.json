@@ -1,0 +1,9 @@
+{
+  "name": "team_task_manager",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node backend/index.js",
+    "build": "cd backend && npm install && npx prisma generate && npx prisma db push --accept-data-loss && cd ../frontend && npm install && npm run build",
+    "install:all": "cd backend && npm install && npx prisma generate && cd ../frontend && npm install"
+  }
+}
