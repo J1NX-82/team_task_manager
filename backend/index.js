@@ -20,7 +20,7 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 
-const frontendPath = path.join(process.cwd(), '..', 'frontend', 'dist');
+const frontendPath = path.join(__dirname, '..', 'frontend', 'dist');
 app.use(express.static(frontendPath));
 
 app.use((req, res) => {
