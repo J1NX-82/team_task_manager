@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/tasks', taskRoutes);
@@ -24,7 +24,7 @@ const frontendPath = path.resolve(__dirname, '../../frontend/dist');
 
 app.use(express.static(frontendPath));
 
-app.get('/*', (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
