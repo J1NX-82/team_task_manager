@@ -2,7 +2,7 @@
 NODE_VERSION = "20.19.0"
 
 [phases.setup]
-nixPkgs = ["nodejs_20"]
+nixPkgs = ["nodejs"]
 
 [phases.install]
 cmds = [
