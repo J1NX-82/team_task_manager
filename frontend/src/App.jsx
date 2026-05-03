@@ -13,7 +13,10 @@ import Projects from './pages/Projects';
 import ProjectDetails from './pages/ProjectDetails';
 
 const PrivateRoute = ({ children }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  if (loading) return <div>Loading...</div>;
+
   return user ? <Layout>{children}</Layout> : <Navigate to="/login" />;
 };
 
@@ -21,29 +24,44 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* Public routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        
-        <Route path="/" element={
-          <PrivateRoute>
-            <Dashboard />
-          </PrivateRoute>
-        } />
-        
-        <Route path="/projects" element={
-          <PrivateRoute>
-            <Projects />
-          </PrivateRoute>
-        } />
-        
-        <Route path="/projects/:id" element={
-          <PrivateRoute>
-            <ProjectDetails />
-          </PrivateRoute>
-        } />
+
+        {/* Default route → redirect to dashboard */}
+        <Route path="/" element={<Navigate to="/dashboard" />} />
+
+        {/* Protected routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/projects"
+          element={
+            <PrivateRoute>
+              <Projects />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/projects/:id"
+          element={
+            <PrivateRoute>
+              <ProjectDetails />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
